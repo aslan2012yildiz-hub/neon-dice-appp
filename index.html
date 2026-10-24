@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090b14"><title>NEON DICE</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="top"><a class="brand" href="#games" aria-label="NEON DICE">NEON <span>DICE</span></a><span class="status"><i></i> MINI APP</span></header>
+  <section class="balance-card">
+    <div class="eyebrow">ТВОЙ ВИРТУАЛЬНЫЙ БАЛАНС</div><div class="balance"><span id="balance">1 000</span> <small>NEON</small></div>
+    <div class="balance-actions"><button class="btn primary" id="dailyBtn">Забрать бонус</button><button class="btn secondary" data-tab="profile">История операций</button></div>
+    <p class="subtle">NEON — игровые очки, не деньги. Пополнение и вывод денежных средств не поддерживаются.</p>
+  </section>
+  <main>
+    <section class="screen active" id="screen-games">
+      <div class="section-head"><div><h1>Игровая зона</h1><p>Выбирай режим и играй за виртуальные очки</p></div><span class="counter">5 режимов</span></div>
+      <div class="game-grid">
+        <button class="game-card" data-game="rocket"><span class="game-icon">🚀</span><b>Ракета</b><small>Полет к множителю</small></button>
+        <button class="game-card" data-game="wheel"><span class="game-icon">🎡</span><b>Колесо фортуны</b><small>Случайная награда</small></button>
+        <button class="game-card" data-game="upgrade"><span class="game-icon">⚡</span><b>Апгрейд</b><small>Улучшай предметы</small></button>
+        <button class="game-card" data-game="plane"><span class="game-icon">🛩️</span><b>Самолёт</b><small>Набери высоту</small></button>
+        <button class="game-card wide" data-game="mine"><span class="game-icon">⛏️</span><span><b>Майнкрафт: кирка</b><small>Копай блоки и собирай коллекцию</small></span><span class="chevron">›</span></button>
+      </div>
+      <div class="panel promo"><span class="promo-icon">🎁</span><div><b>Ежедневный бонус</b><p>Забирай виртуальные NEON один раз за день</p></div><button class="icon-btn" id="dailyBtn2">＋</button></div>
+    </section>
+    <section class="screen" id="screen-inventory"><div class="section-head"><div><h1>Инвентарь</h1><p>Твои коллекционные предметы</p></div><span class="counter" id="itemCount">0 предметов</span></div><div class="panel" id="inventoryList"><div class="empty">🎒<b>Пока пусто</b><span>Играй и собирай виртуальные предметы.</span></div></div></section>
+    <section class="screen" id="screen-cases"><div class="section-head"><div><h1>Кейсы</h1><p>Открывай кейсы за виртуальные очки</p></div></div><div class="case-list">
+      <article class="case-card"><div class="case-art purple">🌌</div><div class="case-info"><b>Космический</b><small>Космические предметы</small><button class="btn primary case-open" data-case="cosmic" data-cost="250">Открыть · 250 NEON</button></div></article>
+      <article class="case-card"><div class="case-art cyan">💎</div><div class="case-info"><b>Неоновый</b><small>Неоновые коллекционные вещи</small><button class="btn primary case-open" data-case="neon" data-cost="400">Открыть · 400 NEON</button></div></article>
+      <article class="case-card"><div class="case-art pink">🧊</div><div class="case-info"><b>Ледяной</b><small>Ледяная коллекция</small><button class="btn primary case-open" data-case="ice" data-cost="150">Открыть · 150 NEON</button></div></article>
+    </div><div id="caseResult" class="panel hidden"></div></section>
+    <section class="screen" id="screen-profile"><div class="section-head"><div><h1>Профиль</h1><p>Аккаунт и реферальная программа</p></div></div>
+      <div class="panel profile-card"><div class="avatar" id="avatar">N</div><div class="profile-main"><b id="userName">Игрок NEON</b><small id="userId">Telegram Mini App</small></div><span class="tag">ИГРОК</span></div>
+      <div class="panel"><h2>Баланс и операции</h2><p class="subtle">Баланс состоит из виртуальных игровых очков. Денежные депозиты, ставки на деньги и вывод денег отключены.</p><div class="stat-row"><span>Текущий баланс</span><b><span id="profileBalance">1 000</span> NEON</b></div><h3>Последние операции</h3><div id="history" class="history"><p class="subtle">Операций пока нет.</p></div></div>
+      <div class="panel"><div class="ref-title"><span>👥</span><div><h2>Реферальная система</h2><p>10% от виртуальных наград приглашённого</p></div></div><label for="refLink">Твоя пригласительная ссылка</label><div class="copy-row"><input id="refLink" readonly value="Сначала открой в Telegram"><button class="btn primary" id="copyRef">Копировать</button></div><div class="stats"><div><small>Приглашено</small><b id="refCount">0</b></div><div><small>Получено NEON</small><b id="refEarn">0</b></div></div></div>
+    </section>
+  </main>
+</div>
+<nav class="bottom-nav" aria-label="Основная навигация"><button data-tab="inventory"><span>▣</span>Инвентарь</button><button data-tab="cases"><span>◇</span>Кейсы</button><button data-tab="games" class="selected"><span>🎮</span>Игры</button><button data-tab="profile"><span>♙</span>Профиль</button></nav>
+<div class="modal hidden" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><button class="close" id="closeModal" aria-label="Закрыть">×</button><div class="modal-emoji" id="modalEmoji">🚀</div><h2 id="modalTitle">Ракета</h2><p id="modalDescription">Игра за виртуальные очки.</p><div class="play-stage" id="playStage">Готов?</div><button class="btn primary full" id="playBtn">Играть · 50 NEON</button><p class="subtle center">Только виртуальные очки. Денежных выигрышей нет.</p></div></div>
+<div class="toast hidden" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
